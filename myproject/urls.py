@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myapp.views import AltaFamiliar, BuscarFamiliar, FamiliarCrear, FamiliarList, monstrar_familiares
+from myapp.views import AltaFamiliar, BuscarFamiliar, FamiliarActualizar, FamiliarBorrar, FamiliarCrear, FamiliarList, monstrar_familiares
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('mi-familia/alta', AltaFamiliar.as_view()), # NUEVA RUTA PARA DAR DE ALTA FAMILIAR
     path('panel-familia/', FamiliarList.as_view()),
     path('panel-familia/crear', FamiliarCrear.as_view()),
+    path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view()), 
+    path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
 ]
