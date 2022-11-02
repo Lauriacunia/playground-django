@@ -2,7 +2,7 @@ from django.shortcuts import render
 from myapp.models import Familiar
 from myapp.forms import Buscar , FamiliarForm
 from django.views import View 
-
+from django.views.generic import ListView, CreateView 
 
 def monstrar_familiares(request):
   lista_familiares = Familiar.objects.all()
@@ -50,3 +50,14 @@ class AltaFamiliar(View):
                                                         'msg_exito': msg_exito})
         
         return render(request, self.template_name, {"form": form})
+
+
+class FamiliarList(ListView):
+  model = Familiar   #el resto de logica de listar lo hereda de ListView
+  template_name = 'familiar_list.html' #nombre del template que se va a renderizar
+
+class FamiliarCrear(CreateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  template_name = 'familiar_form.html'
+  fields = ["nombre", "direccion", "numero_pasaporte"]
